@@ -1,0 +1,253 @@
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #96a3ca;
+}
+
+.clocks{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #4b5469;
+}
+
+.player {
+    width: calc(97vw - 10px);
+    height: calc(41vh - 10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2.4em;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.whites {
+    color: #000;
+    background-color: #fff;
+    border-radius: 20px 20px 0px 0px;
+    && p {
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+    }
+}
+.whites:active{
+    background-color: #c9c9c9;
+}
+
+.blacks {
+    color: #fff;
+    background-color: #000;
+    border-radius: 0px 0px 20px 20px;  
+}
+
+.blacks:active{
+    background-color: #424242;
+}
+
+.unable-white{
+  background-color: #bcd1ff;
+  color: #061c49;
+}
+.unable-black{
+  background-color: #081836;
+  color: #bcd1ff;  
+}
+
+.controls{
+    width: 90vw;
+    display: flex;
+    margin: 20px 0px 20px 0px;
+    justify-content: space-around;
+}
+
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12.5px 15px;
+    margin: 5px;
+    background-color: #bfc5d3;
+}
+
+.time-alert{
+  -webkit-animation: redtime 2s infinite cubic-bezier(0.99, -0.23, 0.03, 1.07);
+  animation: redtime 2s infinite cubic-bezier(0.99, -0.23, 0.03, 1.07);
+}
+@keyframes redtime{
+  to {color: red;}
+}
+
+ .modal-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:  #171a23c2;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  
+  .modal {
+    width: 310px;
+    height: 440px;
+    background-color: #b4bedd;
+    border: 1px solid #09080e;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-wrapper h2 {
+    font-size: 1.7em;
+    font-weight: bold;
+    color: #272b35;
+  }
+
+  .modal-wrapper label {
+    width: 255px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4b5469;
+  }
+
+  .modal-wrapper input {
+    width: 3em;
+    border-radius: 10px;
+    border: 2.5px solid #1a1d24;
+    color: #fff;
+    background-color: #3c4151;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .modal-buttons {
+    padding: 10px;
+    width: 300px;
+    margin: 5px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .modal-buttons button {
+    width: 90px;
+    border: none;
+    padding: 10px;
+    background-color: #444a59;
+    color: #fff;
+  }
+
+  .apply:hover {
+    color: #1d4924;
+    background-color: #34ad0f;
+  }
+  .cancel:hover {
+    color: #570a0a;
+    background-color: #e02020;
+  } 
+
+/* Media queries */
+  @media screen and (min-width: 700px) {  
+    .btn{
+      padding: 10px 35px;
+    }
+  }
+  @media screen and (min-width: 1024px) {  
+    .clocks {
+      display: flex;
+      flex-direction: row;
+    }
+  .player {
+     width: calc(32vw - 10px);
+     height: calc(56vh - 10px);
+    }
+  .controls {
+      width: 15vw;
+      height: 45vh;
+      display: flex;
+      margin: 0px 20px 0px 20px;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+  .blacks {
+      border-radius: 0px 20px 20px 0px;
+    }
+    .whites {
+      border-radius: 20px 0px 0px 20px;
+      && p {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+      }
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    body{
+      font-size: 20px;
+    }
+    .btn{
+      padding: 15px 55px;
+    }
+   .modal{
+      width: 450px;
+      height: 550px;
+    }
+    .modal-wrapper label {
+      width: 400px;
+      font-size: 1.5em;
+    }
+    .modal-wrapper input {
+      font-size: 26px;
+    }
+    .modal-buttons {
+      width: 400px;
+    }
+    .modal-buttons button {
+      width: 100px;
+    }
+  }
+    
+    @media screen and (min-width: 1550px) {
+      .player {
+        width: 22vw;
+        height: calc(50vh + 10vh);
+      }
+  }
+  @media screen and (min-width: 2400px) {
+    .player{
+      width: 17vw;
+      height: 50vh
+    }
+    p {
+      font-size: 90px;
+    }
+    .btn{
+      padding: 20px 55px;
+    }
+  }
+  
