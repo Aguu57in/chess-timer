@@ -15,17 +15,17 @@ export const ChessClock = () => {
   const [blackTime, setBlackTime] = useState(900);
   const [whiteTime, setWhiteTime] = useState(900);
   const [activePlayer, setActivePlayer] = useState(null);
-  const [isPaused, setIsPaused] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [initialTime, setInitialTimeInput] = useState('900');
-  const [increment, setIncrementInput] = useState('0');
+  const [initialTime, setInitialTime] = useState('900');
+  const [increment, setIncrement] = useState('0');
+  const [gameIsPaused, setGameIsPaused] = useState(false);
   const [gameIsStarted, setGameIsStarted] = useState(false);
   const [gameIsFinished, setGameIsFinished] = useState(false);
 
   useEffect(() => {
     let interval;
 
-    if (!isPaused) {
+    if (!gameIsPaused) {
       if (activePlayer === 'black' && blackTime > 0) {
         interval = setInterval(() => {
           setBlackTime((prevTime) => prevTime - 1);
@@ -37,12 +37,12 @@ export const ChessClock = () => {
       }
     }
     return () => clearInterval(interval);
-  }, [activePlayer, blackTime, whiteTime, isPaused]);
+  }, [activePlayer, blackTime, whiteTime, gameIsPaused]);
 
 
 
   const switchPlayer = () => {
-    if (!isPaused) {
+    if (!gameIsPaused) {
       setActivePlayer((prevPlayer) => {
         if (!gameIsStarted) {
           setGameIsStarted(true);
@@ -75,7 +75,7 @@ export const ChessClock = () => {
   }, [handleSpacebar]);
 
   const togglePause = () => {
-    setIsPaused((prevIsPaused) => !prevIsPaused);
+    setGameIsPaused((prevIsPaused) => !prevIsPaused);
   };
 
   const timeAlert = (secs) => {
@@ -87,13 +87,13 @@ export const ChessClock = () => {
   };
   const closeModal = () => {
     setModalIsOpen(false);
-  };
+  }; 
 
   const resetClock = () => {
     setBlackTime(parseInt(initialTime));
     setWhiteTime(parseInt(initialTime));
     setActivePlayer(null);
-    setIsPaused(false);
+    setGameIsPaused(false);
     setModalIsOpen(false);
     setGameIsStarted(false);
     setGameIsFinished(false);
@@ -102,7 +102,7 @@ export const ChessClock = () => {
   useEffect(() => {
     if (blackTime === 0 || whiteTime === 0) {
       setGameIsFinished(true);
-      setIsPaused(true);
+      setGameIsPaused(true);
       const ganador = blackTime === 0 ? 'blancas' : 'negras';
 
       Swal.fire({
@@ -126,19 +126,19 @@ export const ChessClock = () => {
       <div>
         <div onClick={switchPlayer}
           className={`player whites ${activePlayer === "white" ? null : "unable-white"}
-           ${timeAlert(whiteTime) && activePlayer === "white" && !isPaused ? "time-alert" : null}`}>
+           ${timeAlert(whiteTime) && activePlayer === "white" && !gameIsPaused ? "time-alert" : null}`}>
           <p>{formatTime(whiteTime)}</p>
         </div>
       </div>
       <div className="controls">
         <button className="btn" onClick={openModal}><img src="/custom.svg"/></button>
-        <button className="btn pause-play-btn" onClick={togglePause}>{isPaused ? 
+        <button className="btn pause-play-btn" onClick={togglePause}>{gameIsPaused ? 
           <img src="/play.svg" /> : <img src="/pause.svg" />}</button>
         <button className="btn reset-btn" onClick={resetClock}><img src="/reset.svg"/></button>
       </div>
         <div onClick={switchPlayer}
           className={`player blacks ${activePlayer === "black" ? null : "unable-black"}
-          ${timeAlert(blackTime) && activePlayer === "black" && !isPaused ? "time-alert" : null}`}>
+          ${timeAlert(blackTime) && activePlayer === "black" && !gameIsPaused ? "time-alert" : null}`}>
           <p>{formatTime(blackTime)}</p>
         </div>
       </div>
@@ -152,7 +152,7 @@ export const ChessClock = () => {
           <input
           type="number"
           value={initialTime}
-          onChange={(e) => setInitialTimeInput(e.target.value)}
+          onChange={(e) => setInitialTime(e.target.value)}
           />
         </label>
 
@@ -161,7 +161,7 @@ export const ChessClock = () => {
           <input
           type="number"
           value={increment}
-          onChange={(e) => setIncrementInput(e.target.value)}
+          onChange={(e) => setIncrement(e.target.value)}
           />
         </label>
 
@@ -170,7 +170,7 @@ export const ChessClock = () => {
           <button className="cancel" onClick={closeModal}>Cancelar</button>
         </div>
         </div>
-      </Modal>  
+      </Modal> 
 
     </div>
   );
